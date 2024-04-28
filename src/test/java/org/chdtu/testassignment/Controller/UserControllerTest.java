@@ -22,7 +22,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(UserController.class)
 @AutoConfigureMockMvc
@@ -30,12 +29,9 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
-
     @Autowired
     private ObjectMapper objectMapper;
 
-    Map<String, User> userStore = new HashMap<>();
     User userDefault;
 
     @BeforeEach
@@ -47,8 +43,6 @@ class UserControllerTest {
                 LocalDate.of(1990, 1, 1),
                 "123 Street",
                 "1234567890");
-        userStore.clear();
-        userStore.put(userDefault.getEmail(), userDefault);
     }
 
     @Test

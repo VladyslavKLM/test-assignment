@@ -1,16 +1,15 @@
 package org.chdtu.testassignment.Controller;
 
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.chdtu.testassignment.Model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +17,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
-@Validated
 public class UserController {
     private static final Map<String, User> userStore = new HashMap<>();
 
     @Value("${user.minimumAge}")
     private int minimumAge;
+
+    @GetMapping
+    public Collection<User> getAll(){
+        return userStore.values();
+    }
 
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
@@ -56,16 +59,6 @@ public class UserController {
         }
         if (updates.containsKey("birthDate")) {
             LocalDate birthDate = LocalDate.parse((String) updates.get("birthDate"));
-
-
-
-            if (birthDate.isAfter(LocalDate.now())) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-
-
-
             user.setBirthDate(birthDate);
         }
 
@@ -79,6 +72,7 @@ public class UserController {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
         userStore.put(email, updatedUser);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
@@ -92,6 +86,7 @@ public class UserController {
         userStore.remove(email);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<User>> searchUsersByBirthDate(@RequestParam @NotNull LocalDate from, @RequestParam @NotNull LocalDate to) {
         if (from.isAfter(to)) {
