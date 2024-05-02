@@ -1,7 +1,7 @@
-package org.chdtu.testassignment.Controller;
+package org.chdtu.testassignment.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chdtu.testassignment.Model.User;
+import org.chdtu.testassignment.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

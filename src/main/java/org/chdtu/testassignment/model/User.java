@@ -1,4 +1,4 @@
-package org.chdtu.testassignment.Model;
+package org.chdtu.testassignment.model;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

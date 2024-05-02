@@ -1,8 +1,8 @@
-package org.chdtu.testassignment.Controller;
+package org.chdtu.testassignment.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.chdtu.testassignment.Model.User;
+import org.chdtu.testassignment.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
